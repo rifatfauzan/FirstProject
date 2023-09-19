@@ -39,11 +39,11 @@ Berikut merupakan link yang menuju kepada aplikasi saya: [Mon's Inventory Manage
 JSON lebih sering digunakan dalam pertukaran data antara aplikasi web modern karena JSON memiliki format yang lebih sederhana, ringkas, serta mudah dibaca oleh manusia ataupun oleh komputer. Dengan demikian, pemrosesan data dapat dilakukan dengan lebih cepat dalam melakukan pertukaran data untuk memaksimalkan pengalaman pengguna.
 
 ### Mengakses kelima URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam `README.md`.
-<img src='/Assets/Tugas3/SSHTML.jpg'>
-<img src='/Assets/Tugas3/SSXML.jpg'>
-<img src='/Assets/Tugas3/SSXMLBYID.jpg'>
-<img src='/Assets/Tugas3/SSJSON.jpg'>
-<img src='/Assets/Tugas3/SSJSONBYID.jpg'>
+<img src='/Assets/Tugas3/SSHTML.png'>
+<img src='/Assets/Tugas3/SSXML.png'>
+<img src='/Assets/Tugas3/SSXMLBYID.png'>
+<img src='/Assets/Tugas3/SSJSON.png'>
+<img src='/Assets/Tugas3/SSJSONBYID.png'>
 
 
 ## Jawaban Tugas 2
