@@ -46,7 +46,7 @@ JSON lebih sering digunakan dalam pertukaran data antara aplikasi web modern kar
 <img src='/Assets/Tugas3/SSJSONBYID.png'>
 
 
-## Jawaban Tugas 2
+## Jawaban Soal Tugas 2
 
 ### 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)
 1. Pertama, saya membuat project baru Django dengan menggunakan virtual environment
