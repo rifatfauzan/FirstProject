@@ -4,6 +4,90 @@
 ## Link Aplikasi
 Berikut merupakan link yang menuju kepada aplikasi saya: [Mon's Inventory Manager](https://monsfirstproject.adaptable.app/main/)
 
+# Jawaban Soal Tugas 4
+
+### Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step* (bukan hanya sekadar mengikuti tutorial)
+1. Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar.
+    - **REGISTER**
+        - Pada file  `views.py` melakukan import `redirect`, `UserCreationForm`, `messages`
+        - Membuat fungsi `register` pada `views.py` untuk form registrasi dan menghasilkan akun pengguna ketika data di-*submit* dari form
+        - Membuat file baru pada `main/templates` dengan nama `register.html` untuk membuat *template* dari *register*
+        - Melakukan import fungsi `register` pada direktori `main/urls.py`  
+        - Menambahkan *path URL* pada `urls.py`
+    - **LOGIN**
+        - Pada file  `views.py` melakukan import `authenticate` dan `login`
+        - Membuat fungsi `login_user` pada `views.py` untuk mengautentikasi user yang ingin melakukan *login*
+        - Membuat file baru pada `main/templates` dengan nama `login.html` untuk membuat *template* dari *login*
+        - Melakukan import fungsi `login_user` pada direktori `main/urls.py`  
+        - Menambahkan *path URL* pada `urls.py`
+    - **LOGOUT**
+        - Pada file  `views.py` melakukan import `logout`
+        - Membuat fungsi `logout_user` pada `views.py` untuk mengautentikasi user yang ini melakukan *logout*
+        - Menambahkan potongan kode pada `main/templates/main.html` untuk button logout
+        - Melakukan import fungsi `logout_user` pada direktori `main/urls.py`  
+        - Menambahkan *path URL* pada `urls.py`
+
+2. Membuat **dua** akun pengguna dengan masing-masing **tiga** *dummy* data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun **di lokal**.
+<img src='/Assets/Tugas4/Main.png'>
+<img src='/Assets/Tugas4/Dummy.png'>
+
+3. Menghubungkan model `Item` dengan `User`.
+    - Pada file  `models.py` melakukan import `user`
+    - Menambahkan `ForeignKey` pada `Item` di berkas `models.py` yang berfungsi untuk menghubungkan suatu barang dengan usernya
+    - Pada file  `models.py`, mengubah kode pada fungsi `create_item`
+    - Menambahkan parameter `commit=False` pada variable `items` yang berfungsi untuk mencegah Django agar tidak langsung menyimpan objek ke database
+    - Isi field `user` dengan objek `User` dari return value `request.user` untuk menandakan bahwa objek tersebut dimiliki oleh pengguna yang sedang login
+
+4. Menampilkan detail informasi pengguna yang sedang *logged* in seperti *username* dan menerapkan `cookies` seperti `last login` pada halaman utama aplikasi
+    - Ubah fungsi `show_main`
+        - Menampilkan objek yang terasosiasi dengan akun yang sedang dipakai dengan  mengganti kode di fungsi `show_main` dengan potongan kode baru `Item.objects.filter(user=request.user)`
+        - Menambahkan kode `request.user.username` untuk mereturn nama sesuai akun yang dipakai
+    - Pada file  `models.py` melakukan import `HttpResponseRedirect`, `reverse`, dan `datetime`
+    - Menambahkan potongan kode pada fungsi `login_user`untuk melihat kapan terakhir kali pengguna melakukan *login*. Edit **blok** `if user is not None` dengan menambahkan kode:
+        - `login(request, user)`
+        - `response = HttpResponseRedirect(reverse("main:show_main"))`
+        - `response.set_cookie('last_login', str(datetime.datetime.now()))`
+        - `return response`
+    - Pada fungsi `show_main` tambahkan `'last_login': request.COOKIES['last_login']` ke dalam `context`
+    - Ubah fungsi `logout_user` dengan menambahkan kode:
+        - `response = HttpResponseRedirect(reverse('main:login'))`
+        - `response.delete_cookie('last_login')`
+        - `return response`
+    - Pada berkas `main.html` tambahkan kode `<h5>Sesi terakhir login: {{ last_login }}</h5>` untuk menunjukkan jam terakhir login pada situsnya
+
+### Apa itu Django `UserCreationForm`, dan jelaskan apa kelebihan dan kekurangannya?
+`UserCreationForm` adalah salah satu formulir bawaan yang disediakan oleh Django, sebuah kerangka kerja pengembangan web. Formulir ini digunakan untuk membuat formulir pendaftaran pengguna dalam aplikasi web yang dikembangkan dengan Django.
+
+- **Kelebihan dari UserCreationForm:**
+    - **Mudah Digunakan:** UserCreationForm sudah disiapkan dan dapat digunakan dengan mudah tanpa perlu menulis formulir pendaftaran dari awal. Ini menghemat waktu dan upaya dalam pengembangan aplikasi web.
+    - **Integrasi dengan Django Authentication:** Formulir ini terintegrasi dengan baik dengan sistem otentikasi bawaan Django. Setelah pengguna mendaftar, data akun pengguna akan disimpan dalam database secara otomatis.
+    - **Validasi Bawaan:** UserCreationForm dilengkapi dengan validasi bawaan yang memastikan bahwa pengguna harus memasukkan data yang benar dan sesuai saat mendaftar, seperti memeriksa apakah alamat username sudah digunakan.
+- **Kekurangan dari UserCreationForm:**
+    - **Kurang Fleksibel:** Jika aplikasi Anda memiliki persyaratan pendaftaran pengguna yang sangat khusus atau kompleks, maka UserCreationForm mungkin tidak cukup fleksibel untuk memenuhi kebutuhan tersebut.
+    - **Ketergantungan pada Django:** Untuk menggunakan *UserCreationForm*, maka developer juga harus menggunakan Django sebagai frameworknya. Oleh karena itu, apabila menggunakan *framework* selain Django, maka *UserCreationForm* tidak dapat digunakan.
+    - **Keterbatasan Kostumisasi**: Meskipun mudah digunakan, *UserCreationForm* memiliki fitur yang terbatas. Oleh karena itu, apabila developer ingin menambahkan fitur tambahan, maka developer harus menambahkan fitur-fitur lainnya secara manual.
+
+### Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
+**Autentikasi** dalam konteks Django adalah proses memeriksa apakah user yang mencoba masuk ke sistem adalah merupakan pemilik akun tersebut. Biasanya proses autentikasi melibatkan user untuk memasukkan username dan password.
+
+**Otorisasi** adalah langkah untuk menetapkan hak akses pengguna setelah mereka berhasil terautentikasi. Fungsi dari otorisasi adalah untuk mengatur terkait akses apa saja yang dimiliki oleh user tersebut.
+
+**Autentikasi** dan **Otorisasi** sama-sama penting untuk digunakan untuk memastikan bahwa user merupakan pengguna yang memang seharusnya masuk ke dalam suatu sistem. Kombinasi antara autentikasi dan otorisasi akan meningkatkan keamanan dari suatu sistem karena dapat mencegah user untuk melakukan hal-hal yang tidak diinginkan.
+
+### Apa itu *cookies* dalam konteks aplikasi web, dan bagaimana Django menggunakan *cookies* untuk mengelola data sesi pengguna?
+*Cookies* dpada aplikasi web merupakan sebuah bagian kecil data yang disimpan pada *device* pengguna untuk menyimpan informasi seperti preferensi web serta *ID Session*. Dengan demikian, ketika user mengakses website tersebut akan memunculkan preferensi yang sudah disimpan sebelumnya.
+
+Django menggunakan *cookies* untuk mengelola data sesi pengguna dengan cara berikut:
+- **Membuat Sesi Pengguna:** Membuat sesi pengguna serta *ID session* yang unik ketika mengakses situs.
+- **Penyimpanan Data Sesi:** Menyimpan info sesi dalam cookies dan dilakukan enkripsi ketika diperlukan.
+- **Mengakses Data Sesi:** Membaca cookies pengguna pada request selanjutnya.
+- **Pembaruan Data Sesi:** Memungkinkan pengembang untuk meng-*update* sesi pengguna.
+- **Pengakhiran Sesi:** Meng-*clear* data sesi saat selesai mengakses situs
+
+### Apakah penggunaan *cookies* aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+Apabila diimplementasikan dengan benar, maka penggunaan cookies secara *default* merupakan hal yang aman.
+Tetapi, penggunaan *cookies* dapat menimbulkan risiko seperti pelanggaran privasi, pencurian cookies, serta rentan terhadap serangan. Oleh karena itu, diperlukan implementasi yang aman agar dapat meminimalisasi risiko dalam penggunaan *cookies*.
+
 # Jawaban Soal Tugas 3
 
 ### Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step* (bukan hanya sekadar mengikuti tutorial)

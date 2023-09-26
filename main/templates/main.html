@@ -8,12 +8,14 @@
 
     <h5>Class:</h5>
     <p>{{class}}</p>
+    <p>{{ message }}</p>
     <table>
         <tr>
             <th>Name</th>
             <th>Amount</th>
             <th>Description</th>
             <th>Date Added</th>
+            <th>Actions</th>
         </tr>
     
         {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
@@ -24,6 +26,24 @@
                 <td>{{item.amount}}</td>
                 <td>{{item.description}}</td>
                 <td>{{item.date_added}}</td>
+                <td>
+                     <!-- Tambah tombol-tombol untuk mengedit dan menghapus item -->
+                     <a href="{% url 'main:increment_amount' item.id %}">
+                        <button>
+                            Increase Amount
+                        </button>
+                    </a>
+                    <a href="{% url 'main:decrement_amount' item.id %}">
+                        <button>
+                            Decrease Amount
+                        </button>
+                    </a>
+                    <a href="{% url 'main:delete_item' item.id %}">
+                        <button>
+                            Delete
+                        </button>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
     </table>
@@ -35,4 +55,12 @@
             Add New Item
         </button>
     </a>
+
+    <a href="{% url 'main:logout' %}">
+        <button>
+            Logout
+        </button>
+    </a>
+
+    <h5>Sesi terakhir login: {{ last_login }}</h5>
 {% endblock content %}
