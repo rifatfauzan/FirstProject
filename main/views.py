@@ -109,3 +109,17 @@ def delete_item(request, item_id):
     item.delete()
     return HttpResponseRedirect(reverse('main:show_main'))
 
+def edit_item(request, id):
+    # Get item berdasarkan ID
+    item = Item.objects.get(pk = id)
+
+    # Set item sebagai instance dari form
+    form = ItemForm(request.POST or None, instance=item)
+
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman awal
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_item.html", context)
