@@ -1,66 +1,74 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{{title}}</h1>
+<h1>{{ title }}</h1>
 
-    <h5>Name:</h5>
-    <p>{{name}}</p>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Name:</h5>
+            <p class="card-text">{{ name }}</p>
 
-    <h5>Class:</h5>
-    <p>{{class}}</p>
-    <p>{{ message }}</p>
-    <table>
+            <h5 class="card-title">Class:</h5>
+            <p class="card-text">{{ class }}</p>
+            <p class="card-text">{{ message }}</p>
+        </div>
+    </div>  
+
+    <table style="width: 100%; margin-top: 20px;">
         <tr>
-            <th>Name</th>
-            <th>Amount</th>
-            <th>Description</th>
-            <th>Date Added</th>
+            <th style="padding-right: 20px;">Name</th>
+            <th style="padding-right: 20px;">Amount</th>
+            <th style="padding-right: 20px;">Description</th>
+            <th style="padding-right: 20px;">Date Added</th>
             <th>Actions</th>
         </tr>
-    
+
         {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
-    
+
         {% for item in items %}
             <tr>
-                <td>{{item.name}}</td>
-                <td>{{item.amount}}</td>
-                <td>{{item.description}}</td>
-                <td>{{item.date_added}}</td>
+                <td style="padding-right: 20px;">{{ item.name }}</td>
+                <td style="padding-right: 20px;">{{ item.amount }}</td>
+                <td style="padding-right: 20px;">{{ item.description }}</td>
+                <td style="padding-right: 20px;">{{ item.date_added }}</td>
                 <td>
                      <!-- Tambah tombol-tombol untuk mengedit dan menghapus item -->
-                     <a href="{% url 'main:increment_amount' item.id %}">
-                        <button>
+                    <a href="{% url 'main:increment_amount' item.id %}">
+                        <button class="btn btn-primary btn-sm">
                             Increase Amount
                         </button>
                     </a>
                     <a href="{% url 'main:decrement_amount' item.id %}">
-                        <button>
+                        <button class="btn btn-primary btn-sm">
                             Decrease Amount
                         </button>
                     </a>
                     <a href="{% url 'main:delete_item' item.id %}">
-                        <button>
+                        <button class="btn btn-danger btn-sm">
                             Delete
+                        </button>
+                    </a>
+                    <a href="{% url 'main:edit_item' item.pk %}">
+                        <button class="btn btn-warning btn-sm">
+                            Edit
                         </button>
                     </a>
                 </td>
             </tr>
         {% endfor %}
     </table>
-    
-    <br />
-    
-    <a href="{% url 'main:create_item' %}">
-        <button>
+
+    <div style="margin-top: 20px;">
+        <a href="{% url 'main:create_item' %}" class="btn btn-success">
             Add New Item
-        </button>
-    </a>
+        </a>
+    </div>
 
-    <a href="{% url 'main:logout' %}">
-        <button>
+    <div style="margin-top: 20px;">
+        <a href="{% url 'main:logout' %}" class="btn btn-secondary">
             Logout
-        </button>
-    </a>
+        </a>
+    </div>
 
-    <h5>Sesi terakhir login: {{ last_login }}</h5>
+    <h5 style="margin-top: 20px;">Sesi terakhir login: {{ last_login }}</h5>
 {% endblock content %}

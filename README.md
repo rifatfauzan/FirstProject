@@ -4,6 +4,61 @@
 ## Link Aplikasi
 Berikut merupakan link yang menuju kepada aplikasi saya: [Mon's Inventory Manager](https://monsfirstproject.adaptable.app/main/)
 
+# Jawaban Soal Tugas 5
+### Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.
+
+1. **Selector Elemen**: Selector ini digunakan untuk memilih elemen di dalam elemen dengan jenis tertentu. Ini memungkinkan pengguna untuk menerapkan gaya atau aturan tertentu pada semua elemen dengan jenis yang sama di situs web. Sebagai contoh, kita dapat menggunakan kode seperti berikut untuk mengubah gaya semua elemen `<p>` atau paragraf:
+   ```css
+   p {
+     font-size: 16px;
+     line-height: 1.5;
+     color: #333;
+   }
+   ```
+   Selector ini akan memengaruhi semua elemen paragraf dalam halaman.
+
+2. **Selector Kelas**: Selector ini digunakan untuk memilih satu atau lebih elemen berdasarkan nama kelas yang diberikan dalam atribut `class`. Ini berguna saat kita ingin menerapkan gaya atau aturan pada elemen-elemen yang memiliki kelas tertentu sehingga gaya tersebut dapat digunakan berulang kali saat mengakses elemen dengan kelas yang sama. Sebagai contoh, kita dapat menggunakan kode berikut untuk mengubah gaya semua elemen dengan kelas `button`:
+   ```css
+   .button {
+     background-color: #3498db;
+     color: #fff;
+     padding: 10px 15px;
+   }
+   ```
+
+3. **Selector ID**: Selector ini digunakan untuk memilih elemen secara individual berdasarkan nilai atribut `id` yang spesifik. Ini berguna ketika kita ingin memberikan gaya yang unik pada elemen tertentu sehingga hanya elemen dengan ID yang cocok yang akan memengaruhi gaya tersebut. Sebagai contoh, kita dapat menggunakan kode berikut untuk mengubah gaya elemen dengan ID `header`:
+   ```css
+   #header {
+     font-size: 24px;
+     color: #2c3e50;
+     text-align: center;
+   }
+   ```
+
+### Penjelasan Mengenai Tag HTML5 yang Dikenal
+
+- `<html>`  : Menandakan awal dan akhir dari dokumen HTML.
+- `<title>` : Mengatur judul dokumen HTML.
+- `<head>`  : Memberikan informasi tambahan tentang dokumen HTML.
+- `<h1 - h6>`: Digunakan untuk membuat judul dengan ukuran berbeda pada dokumen HTML.
+- `<p>`     : Menunjukkan awal dari paragraf pada HTML.
+- `<button>`: Membuat tombol yang dapat diklik pada HTML.
+- `<br>`    : Menghasilkan jeda baris untuk memberi ruang kosong di suatu baris.
+- `<table>` : Membuat tabel dengan baris dan kolom pada HTML.
+- `<div>`   : Menandai sebuah bagian atau divisi dalam HTML.
+
+### Perbedaan Antara Margin dan Padding
+
+Margin adalah ruang di sekitar elemen HTML yang memisahkan elemen dari elemen lain di sekitarnya. Ini digunakan untuk mengatur jarak antara elemen dan elemen lainnya, dan margin menambahkan ruang di luar elemen, sehingga memperbesar ukuran total elemen tersebut. Margin memengaruhi penempatan elemen terhadap elemen lain di sekitarnya, dan bisa memiliki nilai negatif untuk mengarahkan elemen lebih dekat satu sama lain.
+
+Di sisi lain, Padding adalah ruang di sekitar konten dan elemen HTML, yang berada di antara konten dan batas elemen tersebut. Ini digunakan untuk menambahkan ruang internal ke dalam elemen, tetapi ukuran elemen itu sendiri tetap sama. Padding memengaruhi penempatan konten dalam elemen, dan tidak bisa memiliki nilai negatif.
+
+### Perbedaan Antara Framework CSS Tailwind dan Bootstrap
+
+Tailwind adalah kerangka kerja yang menerapkan pendekatan "utility-first," di mana pengguna membangun desain dengan menggabungkan kelas utilitas ke dalam elemen HTML. Ini menyediakan fleksibilitas dan kemampuan kustomisasi yang tinggi, tetapi juga memerlukan pemahaman yang lebih dalam. Bootstrap, di sisi lain, menyediakan sejumlah besar kelas CSS dan komponen yang telah dirancang sebelumnya. Ini memberikan stabilitas dan kemudahan penggunaan, tetapi dapat memiliki keterbatasan dalam fleksibilitas desain yang unik.
+
+Sebaiknya menggunakan Bootstrap ketika Anda ingin membuat situs web sederhana yang tidak memerlukan banyak kustomisasi dalam CSS. Tailwind cocok digunakan ketika Anda perlu mengkustomisasi tampilan dengan tingkat yang lebih tinggi atau saat Anda ingin memiliki kendali yang lebih besar atas desain elemen-elemen Anda.
+
 # Jawaban Soal Tugas 4
 
 ### Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step* (bukan hanya sekadar mengikuti tutorial)
