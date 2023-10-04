@@ -5,6 +5,23 @@
 Berikut merupakan link yang menuju kepada aplikasi saya: [Mon's Inventory Manager](https://monsfirstproject.adaptable.app/main/)
 
 # Jawaban Soal Tugas 5
+### Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step* (bukan hanya sekadar mengikuti tutorial)
+- `base.html`
+    - Pada `base.html`, saya menambahkankan navbar pada bagian atas yang berisi tombol `home` untuk kembali ke tampilan utama situs.
+- `main.html`
+    - Pada `main.html`, saya menambahkan class `card` untuk membuat informasi user dalam bentuk model `card`.
+    - Memberikan margin dan padding agar lebih ke tengah.
+    - Menambahkan warna pada tombol sesuai dengan fungsinya.
+- `login.html`
+    - Pada `login.html`, saya membuat class baru bernama `.login-card` yang berfungsi untuk mengatur posisi, warna, drop shadow, dan sebagainya dalam bentuk card.
+    - Menambahkan `login-card .login_btn:hover` yang berfungsi apabila cursor di-hover di atas button, maka akan berubah warna.
+- `register.html`
+    - Pada `register.html`, saya membuat class baru bernama `.register-card` yang berfungsi untuk mengatur posisi, warna, drop shadow, dan sebagainya dalam bentuk card.
+    - Menambahkan `register-card .register_btn:hover` yang berfungsi apabila cursor di-hover di atas button, maka akan berubah warna.
+- `create_item.html`
+    - Pada `create_item.html`, saya membuat class baru bernama `.card` yang berfungsi untuk mengatur posisi, warna, drop shadow, dan sebagainya dalam bentuk card.
+    - Menambahkan `register-card .register_btn:hover` yang berfungsi apabila cursor di-hover di atas button, maka akan berubah warna.
+
 ### Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.
 
 1. **Selector Elemen**: Selector ini digunakan untuk memilih elemen di dalam elemen dengan jenis tertentu. Ini memungkinkan pengguna untuk menerapkan gaya atau aturan tertentu pada semua elemen dengan jenis yang sama di situs web. Sebagai contoh, kita dapat menggunakan kode seperti berikut untuk mengubah gaya semua elemen `<p>` atau paragraf:
