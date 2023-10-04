@@ -3,36 +3,37 @@
 {% block content %}
 <h1>{{ title }}</h1>
 
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Name:</h5>
-            <p class="card-text">{{ name }}</p>
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">Name:</h5>
+        <p class="card-text">{{ name }}</p>
 
-            <h5 class="card-title">Class:</h5>
-            <p class="card-text">{{ class }}</p>
-            <p class="card-text">{{ message }}</p>
-        </div>
-    </div>  
+        <h5 class="card-title">Class:</h5>
+        <p class="card-text">{{ class }}</p>
+        <p class="card-text">{{ message }}</p>
+    </div>
+</div>  
 
-    <table style="width: 100%; margin-top: 20px;">
+<table class="table table-bordered table-striped" style="width: 100%; margin-top: 20px;">
+    <thead>
         <tr>
-            <th style="padding-right: 20px;">Name</th>
-            <th style="padding-right: 20px;">Amount</th>
-            <th style="padding-right: 20px;">Description</th>
-            <th style="padding-right: 20px;">Date Added</th>
-            <th>Actions</th>
+            <th style="width: 20%;">Name</th>
+            <th style="width: 5%;">Amount</th>
+            <th style="width: 30%;">Description</th>
+            <th style="width: 15%;">Date Added</th>
+            <th style="width: 30%;">Actions</th>
         </tr>
-
+    </thead>
+    <tbody>
         {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
-
         {% for item in items %}
             <tr>
-                <td style="padding-right: 20px;">{{ item.name }}</td>
-                <td style="padding-right: 20px;">{{ item.amount }}</td>
-                <td style="padding-right: 20px;">{{ item.description }}</td>
-                <td style="padding-right: 20px;">{{ item.date_added }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.amount }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.date_added }}</td>
                 <td>
-                     <!-- Tambah tombol-tombol untuk mengedit dan menghapus item -->
+                    <!-- Tambah tombol-tombol untuk mengedit dan menghapus item -->
                     <a href="{% url 'main:increment_amount' item.id %}">
                         <button class="btn btn-primary btn-sm">
                             Increase Amount
@@ -56,19 +57,20 @@
                 </td>
             </tr>
         {% endfor %}
-    </table>
+    </tbody>
+</table>
 
-    <div style="margin-top: 20px;">
-        <a href="{% url 'main:create_item' %}" class="btn btn-success">
-            Add New Item
-        </a>
-    </div>
+<div style="margin-top: 20px;">
+    <a href="{% url 'main:create_item' %}" class="btn btn-success">
+        Add New Item
+    </a>
+</div>
 
-    <div style="margin-top: 20px;">
-        <a href="{% url 'main:logout' %}" class="btn btn-secondary">
-            Logout
-        </a>
-    </div>
+<div style="margin-top: 20px;">
+    <a href="{% url 'main:logout' %}" class="btn btn-secondary">
+        Logout
+    </a>
+</div>
 
-    <h5 style="margin-top: 20px;">Sesi terakhir login: {{ last_login }}</h5>
+<h5 style="margin-top: 20px;">Sesi terakhir login: {{ last_login }}</h5>
 {% endblock content %}
