@@ -11,8 +11,9 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login,  logout
 from django.contrib.auth.decorators import login_required
 import datetime
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 @login_required(login_url='/login')
@@ -91,29 +92,46 @@ def logout_user(request):
     response.delete_cookie('last_login')
     return response
 
-def increment_amount(request, item_id):
-    item = get_object_or_404(Item, id=item_id)
-    item.amount += 1
-    item.save()
-    return HttpResponseRedirect(reverse('main:show_main'))
-
-def decrement_amount(request, item_id):
-    item = get_object_or_404(Item, id=item_id)
-    if item.amount > 0:
-        item.amount -= 1
-        item.save()
-    return HttpResponseRedirect(reverse('main:show_main'))
 
 def delete_item(request, item_id):
     item = get_object_or_404(Item, id=item_id)
     item.delete()
     return HttpResponseRedirect(reverse('main:show_main'))
 
+
+def get_item_json(request):
+    item_item = Item.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', item_item))
+
+@csrf_exempt
+def add_item_ajax(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        amount = request.POST.get("amount")
+        description = request.POST.get("description")
+        user = request.user
+
+        new_product = Item(name=name, amount=amount, description=description, user=user)
+        new_product.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
+
+@csrf_exempt
+def delete_item_ajax(request, item_id):
+    if request.method == 'DELETE':
+        item = get_object_or_404(Item, pk=item_id)
+        item.delete()
+        return HttpResponse(b"DELETED", status=200)
+    return HttpResponseNotFound()
+
+@csrf_exempt
 def edit_item(request, id):
-    # Get item berdasarkan ID
+    # Get product berdasarkan ID
     item = Item.objects.get(pk = id)
 
-    # Set item sebagai instance dari form
+    # Set product sebagai instance dari form
     form = ItemForm(request.POST or None, instance=item)
 
     if form.is_valid() and request.method == "POST":
@@ -123,3 +141,42 @@ def edit_item(request, id):
 
     context = {'form': form}
     return render(request, "edit_item.html", context)
+
+
+
+@csrf_exempt
+def increment_amount(request, item_id):
+    if request.method == 'POST':
+        item = get_object_or_404(Item, pk=item_id)
+        item.amount += 1
+        item.save()
+        return JsonResponse({'status': 'ok', 'amount': item.amount})
+    return HttpResponseNotFound()
+
+@csrf_exempt
+def decrement_amount(request, item_id):
+    if request.method == 'POST':
+        item = get_object_or_404(Item, pk=item_id)
+
+        if item.amount > 0:
+            item.amount -= 1
+            item.save()
+
+        if item.amount == 0:
+            item.delete()
+
+        return JsonResponse({'status': 'ok', 'amount': item.amount})
+    return HttpResponseNotFound()
+
+def get_item_by_id(request, item_id):
+    # Mengambil item berdasarkan ID atau mengembalikan 404 jika tidak ditemukan
+    item = get_object_or_404(Item, pk=item_id)
+    
+    # Mengonversi item ke format yang sesuai (misalnya, JSON)
+    item_data = {
+        'name': item.name,
+        'amount': item.amount,
+        'description': item.description,
+    }
+    
+    return JsonResponse(item_data)
